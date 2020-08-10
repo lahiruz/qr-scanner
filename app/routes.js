@@ -1,15 +1,14 @@
 require('dotenv').config();
 
 const express = require('express');
-const mongoose = require('mongoose');
+const connectDB = require('./connection');
 const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.Promise = global.Promise; 
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+connectDB();
 
 app.get('/api/event', require('../controllers/eventHandler').getEvents);
 app.post('/api/event', require('../controllers/eventHandler').createEvent);
