@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactJson from 'react-json-view';
 
 // SERVICES
 import eventService from './services/eventService';
@@ -22,7 +23,7 @@ function App() {
     return (
       <li key={event._id} className="list__item event">
         <h3 className="event__name">{event.name}</h3>
-        <p className="event__data">{JSON.stringify(event)}</p>
+        <ReactJson src={event} />
       </li>
     );
   };
