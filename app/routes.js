@@ -11,9 +11,9 @@ app.use(bodyParser.json());
 connectDB();
 
 app.get('/getEvents', require('../controllers/eventHandler').getEvents);
-app.post('/api/event', require('../controllers/eventHandler').createEvent);
-app.put('/api/event/:id', require('../controllers/eventHandler').updateEvent);
-app.delete('/api/event/:id', require('../controllers/eventHandler').deleteEvent);
+app.post('/createEvent', require('../controllers/eventHandler').createEvent);
+app.put('/updateEvent/:id', require('../controllers/eventHandler').updateEvent);
+app.delete('/deleteEvent/:id', require('../controllers/eventHandler').deleteEvent);
 
 app.use(express.static('client/build'));
 app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')))
