@@ -23,7 +23,7 @@ function App() {
     return (
       <li key={event._id} className="list__item event">
         <h3 className="event__name">{event.name}</h3>
-        <ReactJson src={event} />
+        <ReactJson name={false} src={event} />
       </li>
     );
   };
