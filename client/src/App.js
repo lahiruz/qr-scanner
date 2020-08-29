@@ -21,12 +21,18 @@ function App() {
     const urlParams = new URLSearchParams(queryString);
     const event_code = urlParams.get('event');
     console.log(event_code);
-    let resData = await eventService.getEvent({
-      event_code,
-      date: moment()
-    });
-    console.log(resData.event);
-    setEvent(resData.event);
+
+    if (event_code) {
+      let resData = await eventService.getEvent({
+        event_code,
+        date: moment()
+      });
+      console.log(resData.event);
+      setEvent(resData.event);
+    } else {
+      setEvent({});
+    }
+
     setLoading(false);
   }
 
