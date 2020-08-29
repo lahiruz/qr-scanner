@@ -36,8 +36,17 @@ function App() {
     setLoading(false);
   }
 
+  const renderEventForm = () => {
+    return (
+      <div>
+        <input type="text" name="user_name"></input>
+        <button>Submit</button>
+      </div>
+    )
+  }
+
   const renderEvent = event => {
-    const {name, event_code} = event || {};
+    const {name, event_code, start, end} = event || {};
     return (
       <div className="event">
         {
@@ -50,6 +59,10 @@ function App() {
               event_code && 
               <div>
                 <h3 className="event__name">Event: {name}</h3>
+                <span className="period"> 
+                Start: <strong>{moment(start).format('LLL')}</strong> - End: <strong>{moment(end).format('LLL')}</strong>
+                </span>
+                {renderEventForm()}
               </div>
             }
             {
