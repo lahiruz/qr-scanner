@@ -1,41 +1,64 @@
 import React, { useState, useEffect } from "react";
-import ReactJson from 'react-json-view';
+// import ReactJson from 'react-json-view';
+import moment from 'moment';
 
 // SERVICES
 import eventService from './services/eventService';
 
 function App() {
-  const [events, setEvents] = useState(null);
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if(!events) {
-      getEvents();
+    if (!loading && !event) {
+      getEventData();
     }
   })
 
-  const getEvents = async () => {
-    let res = await eventService.getAll();
-    console.log(res);
-    setEvents(res);
+  async function getEventData() {
+    setLoading(true);
+    let queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const event_code = urlParams.get('event');
+    console.log(event_code);
+    let resData = await eventService.getEvent({
+      event_code,
+      date: moment()
+    });
+    console.log(resData.event);
+    setEvent(resData.event);
+    setLoading(false);
   }
 
   const renderEvent = event => {
+    const {name, event_code} = event || {};
     return (
-      <li key={event._id} className="list__item event">
-        <h3 className="event__name">{event.name}</h3>
-        <ReactJson name={false} src={event} />
-      </li>
+      <div className="event">
+        {
+          !!loading && <span>Processing Data...</span>
+        }
+        {
+          !loading && 
+          <div>
+            {
+              event_code && 
+              <div>
+                <h3 className="event__name">Event: {name}</h3>
+              </div>
+            }
+            {
+              !event_code && <h3>Requested event not available</h3>
+            }
+          </div>
+        }
+      </div>
     );
   };
 
   return (
     <div className="App">
       <ul className="list1">
-        {(events && events.length > 0) ? (
-          events.map(event => renderEvent(event))
-        ) : (
-          <p>No events found</p>
-        )}
+        {renderEvent(event)}
       </ul>
     </div>
   );

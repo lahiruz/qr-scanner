@@ -10,7 +10,8 @@ const eventSchema = new Schema({
     end: String,
     cancel_automatically: Boolean,
     is_unlimited_numbers: Boolean,
-    is_user_name_required: Boolean
+    is_user_name_required: Boolean,
+    event_code: String
 });
 
 module.exports = mongoose.model('events', eventSchema);

@@ -12,6 +12,7 @@ connectDB();
 
 app.get('/getEvents', require('../controllers/eventHandler').getEvents);
 app.post('/createEvent', require('../controllers/eventHandler').createEvent);
+app.post('/getEvent', require('../controllers/eventHandler').getEvent);
 app.put('/updateEvent/:id', require('../controllers/eventHandler').updateEvent);
 app.delete('/deleteEvent/:id', require('../controllers/eventHandler').deleteEvent);
 
