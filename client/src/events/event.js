@@ -51,7 +51,7 @@ function Event() {
     return (
       <EventWrapper>
         {
-          !!loading && <span>Processing Data...</span>
+          !!loading && <span className="processing">Processing Data...</span>
         }
         {
           !loading && 
@@ -67,7 +67,7 @@ function Event() {
               </div>
             }
             {
-              !event_code && <h3>Requested event not available</h3>
+              !event_code && <h3 className="no-data">Requested event not available</h3>
             }
           </div>
         }

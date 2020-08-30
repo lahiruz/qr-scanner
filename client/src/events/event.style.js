@@ -6,12 +6,18 @@ export const EventWrapper =  styled.div`
   align-items: center;
   justify-content: center;
   color: #fff;
+  .processing {
+    padding: 20px 0;
+  }
   .event__name {
     color: #61dafb;
     font-size: 36px;
   }
   .period strong {
     color: #61dafb;
+  }
+  .no-data {
+    padding: 20px 0;
   }
 `;
 
